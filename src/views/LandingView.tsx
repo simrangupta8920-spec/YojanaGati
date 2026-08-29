@@ -25,9 +25,11 @@ interface LandingViewProps {
   lang: LanguageCode;
   onLangChange: (lang: LanguageCode) => void;
   onGetStarted: () => void;
+  hasProfile: boolean;
+  onGoToProfile: () => void;
 }
 
-export function LandingView({ lang, onLangChange, onGetStarted }: LandingViewProps) {
+export function LandingView({ lang, onLangChange, onGetStarted, hasProfile, onGoToProfile }: LandingViewProps) {
   const { speak, isSpeaking, stopSpeaking } = useTextToSpeech(lang);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -125,6 +127,14 @@ export function LandingView({ lang, onLangChange, onGetStarted }: LandingViewPro
 
           <div className="flex items-center gap-3">
             <LanguageSelector lang={lang} onLangChange={onLangChange} compact />
+            {hasProfile && (
+              <button
+                onClick={onGoToProfile}
+                className="hidden rounded-xl bg-white border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 sm:block"
+              >
+                {t(lang, 'profile')}
+              </button>
+            )}
             <button
               onClick={onGetStarted}
               className="hidden rounded-xl bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-teal-600/20 transition-all hover:bg-teal-700 sm:block"
@@ -161,6 +171,14 @@ export function LandingView({ lang, onLangChange, onGetStarted }: LandingViewPro
               >
                 {t(lang, 'landingNavAbout')}
               </button>
+              {hasProfile && (
+                <button
+                  onClick={onGoToProfile}
+                  className="mt-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 text-center"
+                >
+                  {t(lang, 'profile')}
+                </button>
+              )}
               <button
                 onClick={onGetStarted}
                 className="mt-2 rounded-xl bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white"
@@ -203,12 +221,21 @@ export function LandingView({ lang, onLangChange, onGetStarted }: LandingViewPro
               {t(lang, 'getStarted')}
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </button>
-            <button
-              onClick={() => scrollToSection('features')}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-teal-300 hover:bg-slate-50 sm:w-auto"
-            >
-              {t(lang, 'landingCtaLearnMore')}
-            </button>
+            {hasProfile ? (
+              <button
+                onClick={onGoToProfile}
+                className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-teal-300 hover:bg-slate-50 sm:w-auto"
+              >
+                {t(lang, 'profile')}
+              </button>
+            ) : (
+              <button
+                onClick={() => scrollToSection('features')}
+                className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-teal-300 hover:bg-slate-50 sm:w-auto"
+              >
+                {t(lang, 'landingCtaLearnMore')}
+              </button>
+            )}
           </div>
 
           <button

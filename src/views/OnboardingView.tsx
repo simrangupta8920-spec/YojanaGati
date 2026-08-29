@@ -25,6 +25,7 @@ interface OnboardingViewProps {
   lang: LanguageCode;
   onComplete: (profile: UserProfile) => void;
   onSkip: () => void;
+  onBack: () => void;
 }
 
 const STEPS = [
@@ -38,7 +39,7 @@ const STEPS = [
   { key: 'gender', icon: User, labelKey: 'gender' as const },
 ];
 
-export function OnboardingView({ lang, onComplete, onSkip }: OnboardingViewProps) {
+export function OnboardingView({ lang, onComplete, onSkip, onBack }: OnboardingViewProps) {
   const [step, setStep] = useState(0);
   const [profile, setProfile] = useState<UserProfile>({
     name: '',
@@ -63,8 +64,12 @@ export function OnboardingView({ lang, onComplete, onSkip }: OnboardingViewProps
     }
   };
 
-  const handleBack = () => {
-    if (step > 0) setStep((s) => s - 1);
+  const handleBackStep = () => {
+    if (step > 0) {
+      setStep((s) => s - 1);
+    } else {
+      onBack();
+    }
   };
 
   const handleVoiceInput = (text: string) => {
@@ -186,13 +191,22 @@ export function OnboardingView({ lang, onComplete, onSkip }: OnboardingViewProps
           <div className="space-y-3">
             <input
               type="text"
+              inputMode={['age', 'income', 'percentage'].includes(currentStep.key) ? 'numeric' : 'text'}
               value={profile[currentStep.key as keyof UserProfile] ?? ''}
-              onChange={(e) =>
+              onChange={(e) => {
+                let val = e.target.value;
+                if (currentStep.key === 'name') {
+                  val = val.replace(/[^a-zA-Z\s]/g, '');
+                } else if (['age', 'income', 'percentage'].includes(currentStep.key)) {
+                  val = val.replace(/[^0-9.]/g, '');
+                  if (currentStep.key === 'percentage' && Number(val) > 100) val = '100';
+                  if (currentStep.key === 'age' && Number(val) > 150) val = '150';
+                }
                 setProfile((prev) => ({
                   ...prev,
-                  [currentStep.key]: e.target.value,
-                }))
-              }
+                  [currentStep.key]: val,
+                }));
+              }}
               placeholder={t(lang, currentStep.labelKey)}
               className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-slate-700 focus:border-teal-500 focus:outline-none"
             />
@@ -207,9 +221,8 @@ export function OnboardingView({ lang, onComplete, onSkip }: OnboardingViewProps
 
       <div className="mt-6 flex items-center justify-between">
         <button
-          onClick={handleBack}
-          disabled={step === 0}
-          className="flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-700 disabled:opacity-40"
+          onClick={handleBackStep}
+          className="flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-700"
         >
           <ArrowLeft className="h-4 w-4" />
           {t(lang, 'previousStep')}

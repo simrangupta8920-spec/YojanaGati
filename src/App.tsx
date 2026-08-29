@@ -4,6 +4,7 @@ import {
   Bot,
   FileCheck,
   ShieldX,
+  User,
 } from 'lucide-react';
 import type { LanguageCode, View, UserProfile } from '@/lib/types';
 import { t } from '@/lib/i18n';
@@ -16,6 +17,7 @@ import { BrowseView } from '@/views/BrowseView';
 import { ChatView } from '@/views/ChatView';
 import { DocumentsView } from '@/views/DocumentsView';
 import { PurgeView } from '@/views/PurgeView';
+import { ProfileView } from '@/views/ProfileView';
 
 type AppStage = 'welcome' | 'onboarding' | 'main';
 
@@ -60,6 +62,11 @@ export default function App() {
           lang={lang}
           onLangChange={setLang}
           onGetStarted={() => setStage('onboarding')}
+          hasProfile={Boolean(session.profile)}
+          onGoToProfile={() => {
+            setStage('main');
+            setView('profile');
+          }}
         />
       </div>
     );
@@ -70,7 +77,12 @@ export default function App() {
       <div className="min-h-screen bg-slate-50">
         <div className="border-b border-slate-100 bg-white">
           <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-3">
-            <img src="/logo.png" alt="YojanaGati" className="h-11 w-40 object-contain" />
+            <button
+              onClick={() => setStage('welcome')}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
+              <img src="/logo.png" alt="YojanaGati" className="h-11 w-40 object-contain" />
+            </button>
             <LanguageSelector lang={lang} onLangChange={setLang} compact />
           </div>
         </div>
@@ -79,12 +91,13 @@ export default function App() {
           onComplete={(profile: UserProfile) => {
             session.setProfile(profile);
             setStage('main');
-            setView('browse');
+            setView('profile');
           }}
           onSkip={() => {
             setStage('main');
             setView('browse');
           }}
+          onBack={() => setStage('welcome')}
         />
       </div>
     );
@@ -94,6 +107,7 @@ export default function App() {
     { view: 'browse', icon: Compass, labelKey: 'browse' },
     { view: 'chat', icon: Bot, labelKey: 'chatAssistant' },
     { view: 'documents', icon: FileCheck, labelKey: 'documents' },
+    { view: 'profile', icon: User, labelKey: 'profile' },
     { view: 'purge', icon: ShieldX, labelKey: 'exit' },
   ];
 
@@ -147,6 +161,8 @@ export default function App() {
             onRemoveFile={session.removeFile}
             onUpdateFileAnalysis={session.updateFileAnalysis}
           />
+        ) : view === 'profile' ? (
+          <ProfileView lang={lang} profile={session.profile} />
         ) : view === 'purge' ? (
           <PurgeView
             lang={lang}

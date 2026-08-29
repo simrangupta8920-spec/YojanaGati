@@ -43,7 +43,7 @@ export interface ExtractedDocumentData {
   inconsistencies: string[];
 }
 
-export type View = 'onboarding' | 'browse' | 'chat' | 'documents' | 'purge';
+export type View = 'onboarding' | 'browse' | 'chat' | 'documents' | 'purge' | 'profile';
 
 export const EDUCATION_LEVELS = [
   'School (Class 1-10)',

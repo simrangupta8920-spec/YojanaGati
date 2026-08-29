@@ -134,7 +134,8 @@ type TranslationKey =
   | 'landingFooterRights'
   | 'landingFooterTagline'
   | 'landingBadge'
-  | 'landingTrustTitle';
+  | 'landingTrustTitle'
+  | 'profile';
 
 type Translations = Record<LanguageCode, Record<TranslationKey, string>>;
 
@@ -274,6 +275,7 @@ export const translations: Translations = {
     landingFooterTagline: 'Your gateway to scholarships and government schemes',
     landingBadge: 'Privacy-First • Voice-Enabled • Multilingual',
     landingTrustTitle: 'Trusted by students across India',
+    profile: 'Profile',
   },
   hi: {
     appName: 'YojanaGati',
@@ -410,6 +412,7 @@ export const translations: Translations = {
     landingFooterTagline: 'छात्रवृत्ति और सरकारी योजनाओं के लिए आपका प्रवेश द्�ार',
     landingBadge: 'गोपनीयता-प्रथम • आवाज़-सक्षम • बहुभाषी',
     landingTrustTitle: 'भारत भर के छात्रों द्वारा भरोसेमंद',
+    profile: 'प्रोफ़ाइल',
   },
   pa: {
     appName: 'YojanaGati',
@@ -546,6 +549,7 @@ export const translations: Translations = {
     landingFooterTagline: 'ਸਕਾਲਰਸ਼ਿਪ ਅਤੇ ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ ਲਈ ਤੁਹਾਡਾ ਦਰਵਾਜ਼ਾ',
     landingBadge: 'ਪਰਾਈਵੇਸੀ-ਫਰਸਟ • ਆਵਾਜ਼-ਯੋਗ • ਬਹੁ-ਭਾਸ਼ੀ',
     landingTrustTitle: 'ਪੂਰੇ ਭਾਰਤ ਦੇ ਵਿਦਿਆਰਥੀਆਂ ਦੁਆਰਾ ਭਰੋਸੇਯੋਗ',
+    profile: 'ਪ੍ਰੋਫਾਈਲ',
   },
   bn: {
     appName: 'YojanaGati',
@@ -682,6 +686,7 @@ export const translations: Translations = {
     landingFooterTagline: 'স্কলারশিপ ও সরকারি প্রকল্পের প্রবেশদ্বার',
     landingBadge: 'গোপনীয়তা-প্রথম • কণ্ঠ-সক্ষম • বহুভাষিক',
     landingTrustTitle: 'সারা ভারতের ছাত্রদের দ্বারা বিশ্বস্ত',
+    profile: 'প্রোফাইল',
   },
   ta: {
     appName: 'YojanaGati',
@@ -818,6 +823,7 @@ export const translations: Translations = {
     landingFooterTagline: 'உதவித்தொகை மற்றும் அரசு திட்டங்களுக்கான உங்கள் நுழைவாயில்',
     landingBadge: 'தனியுரிமை-முதல் • குரல்-இயலும் • பல்மொழி',
     landingTrustTitle: 'இந்தியா முழுவதும் மாணவர்களால் நம்பப்பட்டது',
+    profile: 'சுயவிவரம்',
   },
   te: {
     appName: 'YojanaGati',
@@ -954,6 +960,7 @@ export const translations: Translations = {
     landingFooterTagline: 'స్కాలర్‌షిప్ మరియు ప్రభుత్వ పథకాలకు మీ ద్వారం',
     landingBadge: 'గోప్యత-మొదట • గొంతు-సామర్థ్యం • బహుభాషా',
     landingTrustTitle: 'భారతదేశం అంతటా విద్యార్థులచే నమ్మదగినది',
+    profile: 'ప్రొఫైల్',
   },
   mr: {
     appName: 'YojanaGati',
@@ -1090,6 +1097,7 @@ export const translations: Translations = {
     landingFooterTagline: 'शिष्यवृत्ती आणि सरकारी योजनांसाठी तुमचे दालन',
     landingBadge: 'गोपनीयता-प्रथम • आवाज-सक्षम • बहुभाषिक',
     landingTrustTitle: 'संपूर्ण भारतातील विद्यार्थ्यांद्वारे विश्वासार्ह',
+    profile: 'प्रोफाइल',
   },
 };
 
