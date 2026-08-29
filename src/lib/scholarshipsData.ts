@@ -1,7 +1,7 @@
 import type { Scholarship } from '@/lib/supabase';
 
 // Local scholarship data derived from scholarships.json
-// Maps the JSON structure to the Scholarship interface used throughout the app.
+// All eligibility fields are populated for accurate profile-based matching.
 const SCHOLARSHIPS_RAW: Scholarship[] = [
   {
     id: 'merit-cum-means-minority',
@@ -34,13 +34,19 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'Merit-Cum-Means', 'B.Tech', 'NSP', 'National Scholarship Portal',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: 250000,
+    target_gender: null,               // all genders
+    target_categories: ['Minority'],
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'aicte-pragati',
     name: 'AICTE Pragati Scholarship',
     name_hindi: 'एआईसीटीई प्रगति छात्रवृत्ति',
     description:
-      'Support girl students pursuing technical education in AICTE-approved B.Tech programs. Provides annual financial assistance toward tuition and incidentals.',
+      'Support girl students pursuing technical education in AICTE-approved B.Tech programs. Provides annual financial assistance of ₹50,000/year toward tuition and incidentals.',
     category: 'Gender-based',
     eligibility_criteria:
       'Girl students in the 1st year of an AICTE-approved B.Tech program. Family income must not exceed ₹8 lakh/year.',
@@ -65,6 +71,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'Technical Education', 'Pragati', 'NSP', 'National Scholarship Portal',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: 800000,
+    target_gender: 'female',           // girls only
+    target_categories: [],             // all categories
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'ffe-scholarship',
@@ -95,6 +107,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'General', 'Financial Need', 'FFE', 'B.E.',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: 400000,
+    target_gender: null,               // all genders
+    target_categories: [],             // all categories
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'aicte-swanath',
@@ -126,6 +144,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'Critical Illness', 'Disability', 'Income < 8 Lakh', 'Swanath', 'NSP',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: 800000,
+    target_gender: null,               // all genders
+    target_categories: [],             // all categories (special circumstance required)
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'aicte-saksham',
@@ -158,6 +182,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'Saksham', 'Differently Abled', 'Special', 'NSP',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: 800000,
+    target_gender: null,               // all genders
+    target_categories: ['Differently-Abled'],
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'ggsipu-ews',
@@ -188,6 +218,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'Delhi', 'Guru Gobind Singh',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility — EWS income limit is ₹8 lakh/year per Central Govt definition
+    max_income_num: 800000,
+    target_gender: null,
+    target_categories: ['General', 'EBC'],  // EWS is for General/EBC who are economically weak
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'pms-obc',
@@ -220,6 +256,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'NSP', 'Other Backward Class',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: 100000,
+    target_gender: null,
+    target_categories: ['OBC'],
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'pms-st',
@@ -252,6 +294,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'Income-Based', 'e-District Delhi', 'Government',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: null,              // income not specified in source
+    target_gender: null,
+    target_categories: ['ST'],
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'top-class-sc',
@@ -284,6 +332,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'Professional Course', 'Income-Based', 'NSP',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility
+    max_income_num: null,
+    target_gender: null,
+    target_categories: ['SC'],
+    min_age: null,
+    max_age: null,
   },
   {
     id: 'csss',
@@ -315,6 +369,12 @@ const SCHOLARSHIPS_RAW: Scholarship[] = [
       'CSSS', 'NSP', 'Central Sector',
     ],
     created_at: '2024-01-01T00:00:00.000Z',
+    // Eligibility — open to all categories with merit + income constraint
+    max_income_num: 800000,
+    target_gender: null,
+    target_categories: [],             // all categories
+    min_age: null,
+    max_age: null,
   },
 ];
 

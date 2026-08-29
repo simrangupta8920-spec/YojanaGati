@@ -20,6 +20,8 @@ interface ScholarshipCardProps {
   lang: LanguageCode;
   profile?: UserProfile | null;
   defaultExpanded?: boolean;
+  /** Pre-computed eligibility from the engine; overrides local calculation when provided */
+  overrideEligible?: boolean | null;
 }
 
 export function ScholarshipCard({
@@ -27,6 +29,7 @@ export function ScholarshipCard({
   lang,
   profile,
   defaultExpanded = false,
+  overrideEligible,
 }: ScholarshipCardProps) {
   const [expanded, setExpanded] = useState(defaultExpanded);
 
@@ -53,18 +56,12 @@ export function ScholarshipCard({
   const categoryColor =
     categoryColors[scholarship.category] ?? 'bg-slate-100 text-slate-700';
 
-  const isEligible = checkEligibility(scholarship, profile);
+  const isEligible = overrideEligible !== undefined
+    ? overrideEligible
+    : checkEligibility(scholarship, profile);
 
   return (
-    <div
-      className={`overflow-hidden rounded-2xl border-2 bg-white shadow-sm transition-all duration-200 ${
-        isEligible === true
-          ? 'border-teal-300'
-          : isEligible === false
-            ? 'border-slate-200'
-            : 'border-slate-200'
-      }`}
-    >
+    <div className="bg-white">
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">

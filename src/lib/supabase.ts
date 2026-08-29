@@ -15,6 +15,7 @@ export interface Scholarship {
   required_documents: string[];
   funding_amount: string;
   deadline: string;
+  /** Maximum family annual income in INR (null = no income cap) */
   min_income: string | null;
   min_percentage: number | null;
   education_level: string;
@@ -22,6 +23,17 @@ export interface Scholarship {
   region: string;
   keywords: string[];
   created_at: string;
+  // --- Extended eligibility fields for profile matching ---
+  /** Maximum annual family income in INR as a number (null = no cap) */
+  max_income_num: number | null;
+  /** Specific genders eligible: 'female' | 'male' | null (null = all genders) */
+  target_gender: 'female' | 'male' | null;
+  /** Which user profile categories qualify (empty = all) */
+  target_categories: string[];
+  /** Min age requirement (null = no min) */
+  min_age: number | null;
+  /** Max age requirement (null = no max) */
+  max_age: number | null;
 }
 
 export async function fetchScholarships(): Promise<Scholarship[]> {
