@@ -1,0 +1,364 @@
+{
+  "scholarships": [
+    {
+      "id": "merit-cum-means-minority",
+      "name": "Merit-cum-Means Scholarship for Minority Communities",
+      "bestFor": "Minority students",
+      "objective": "Support meritorious students from minority communities who have financial need.",
+      "targetUsers": ["Muslim", "Christian", "Sikh", "Buddhist", "Jain", "Parsi"],
+      "eligibility": {
+        "minMarksPercent": 50,
+        "maxFamilyIncomeINR": 250000,
+        "maxFamilyIncomeDisplay": "\u20b92.5 lakh/year",
+        "courseType": "Professional/technical course (e.g. B.Tech)",
+        "notes": "30% of seats are reserved for girl students."
+      },
+      "requiredDocuments": [
+        "Minority/community-related proof (where required)",
+        "Income certificate",
+        "Marksheets",
+        "Aadhaar",
+        "Fee receipt",
+        "Bank details",
+        "Admission/bonafide proof"
+      ],
+      "benefits": {
+        "description": "Course fee reimbursement plus maintenance allowance",
+        "courseFeeMaxINR": 20000,
+        "courseFeeDisplay": "Up to \u20b920,000/year",
+        "maintenanceAllowance": {
+          "hostellersINR": 10000,
+          "dayScholarsINR": 5000
+        }
+      },
+      "aiTags": [
+        "Minority", "Muslim", "Christian", "Sikh", "Buddhist", "Jain", "Parsi",
+        "Merit-Cum-Means", "B.Tech"
+      ],
+      "portal": "National Scholarship Portal",
+      "applicationDeadline": null,
+      "statusNote": null
+    },
+    {
+      "id": "aicte-pragati",
+      "name": "AICTE Pragati Scholarship",
+      "bestFor": "Girl students",
+      "objective": "Support girl students pursuing technical education.",
+      "targetUsers": ["Girl students pursuing B.Tech"],
+      "eligibility": {
+        "minMarksPercent": null,
+        "maxFamilyIncomeINR": 800000,
+        "maxFamilyIncomeDisplay": "\u20b98 lakh/year",
+        "courseType": "1st year of an AICTE-approved B.Tech program",
+        "notes": null
+      },
+      "requiredDocuments": [
+        "Aadhaar",
+        "Income certificate",
+        "Class 10/12 marksheets",
+        "Fee receipt",
+        "Bank passbook",
+        "Admission/bonafide proof",
+        "Photograph"
+      ],
+      "benefits": {
+        "description": "Annual assistance toward tuition and incidentals",
+        "amountINR": 50000,
+        "amountDisplay": "\u20b950,000/year"
+      },
+      "aiTags": [
+        "Girl Student", "B.Tech", "1st Year", "AICTE", "Income < 8 Lakh", "Technical Education"
+      ],
+      "portal": "National Scholarship Portal",
+      "applicationDeadline": "2026-10-31",
+      "statusNote": "NSP currently lists AICTE Pragati for Technical Degree students, with applications open until 31 October 2026."
+    },
+    {
+      "id": "ffe-scholarship",
+      "name": "Foundation for Excellence (FFE) Scholarship",
+      "bestFor": "Engineering students needing merit + financial support",
+      "objective": "Provide merit-based financial assistance to talented students pursuing professional education.",
+      "targetUsers": ["B.E./B.Tech students with financial need"],
+      "eligibility": {
+        "minMarksPercent": 60,
+        "minMarksNote": "Minimum 60% in Class 10 and 12",
+        "maxFamilyIncomeINR": 400000,
+        "maxFamilyIncomeDisplay": "\u20b94 lakh/year",
+        "courseType": "B.E./B.Tech",
+        "notes": "Merit-cum-means conditions apply."
+      },
+      "requiredDocuments": [
+        "Income proof",
+        "Class 10/12 marksheets",
+        "Current academic records",
+        "Admission/fee documents",
+        "Bank details",
+        "Other documents requested during application"
+      ],
+      "benefits": {
+        "description": "Merit-based financial assistance toward tuition",
+        "amountINR": null,
+        "amountDisplay": "Amount varies (merit-based)"
+      },
+      "aiTags": [
+        "B.Tech", "Engineering", "Merit-Cum-Means", "Income < 4 Lakh", "General", "Financial Need"
+      ],
+      "portal": "Foundation for Excellence",
+      "applicationDeadline": null,
+      "applicationOpens": "2026-08-01",
+      "statusNote": "The uploaded guide states the 2026 cycle applications begin August 1, 2026."
+    },
+    {
+      "id": "aicte-swanath",
+      "name": "AICTE Swanath Scholarship",
+      "bestFor": "Students facing specific difficult family circumstances",
+      "objective": "Provide financial support to students facing major family hardship.",
+      "targetUsers": [
+        "Orphans",
+        "Students whose parents died due to COVID-19",
+        "Wards of Armed Forces/CAPF martyrs",
+        "Students with a parent having critical illness or more than 80% disability"
+      ],
+      "eligibility": {
+        "minMarksPercent": null,
+        "maxFamilyIncomeINR": 800000,
+        "maxFamilyIncomeDisplay": "\u20b98 lakh/year",
+        "courseType": "AICTE-approved B.Tech program",
+        "notes": "Must meet one of the specified special circumstances."
+      },
+      "requiredDocuments": [
+        "Relevant proof of the special circumstance",
+        "Income certificate",
+        "Aadhaar",
+        "Academic records",
+        "Fee receipt",
+        "Bank details",
+        "Admission/bonafide proof"
+      ],
+      "benefits": {
+        "description": "Annual support for fees, books, computer and incidentals, up to 4 years",
+        "amountINR": 50000,
+        "amountDisplay": "\u20b950,000/year",
+        "durationYears": 4
+      },
+      "aiTags": [
+        "AICTE", "B.Tech", "Orphan", "COVID-19 Parent Loss", "Armed Forces", "CAPF",
+        "Critical Illness", "Disability", "Income < 8 Lakh"
+      ],
+      "portal": "National Scholarship Portal",
+      "applicationDeadline": "2026-10-31",
+      "statusNote": "NSP currently lists Swanath Technical Degree applications through 31 October 2026."
+    },
+    {
+      "id": "aicte-saksham",
+      "name": "AICTE Saksham Scholarship",
+      "bestFor": "Students with disabilities",
+      "objective": "Provide financial assistance to specially-abled students pursuing technical education.",
+      "targetUsers": ["Students with disabilities pursuing B.Tech"],
+      "eligibility": {
+        "minMarksPercent": null,
+        "minDisabilityPercent": 40,
+        "maxFamilyIncomeINR": 800000,
+        "maxFamilyIncomeDisplay": "\u20b98 lakh/year",
+        "courseType": "1st year of an AICTE-approved B.Tech program",
+        "notes": null
+      },
+      "requiredDocuments": [
+        "Disability certificate",
+        "Income certificate",
+        "Aadhaar",
+        "Marksheets",
+        "Fee receipt",
+        "Bank details",
+        "Admission/bonafide proof",
+        "Photograph"
+      ],
+      "benefits": {
+        "description": "Annual financial assistance",
+        "amountINR": 50000,
+        "amountDisplay": "\u20b950,000/year"
+      },
+      "aiTags": [
+        "PwD", "40% Disability", "B.Tech", "1st Year", "AICTE", "Income < 8 Lakh"
+      ],
+      "portal": "National Scholarship Portal",
+      "applicationDeadline": "2026-10-31",
+      "statusNote": "NSP currently lists the Technical Degree version and applications through 31 October 2026."
+    },
+    {
+      "id": "ggsipu-ews",
+      "name": "GGSIPU EWS Financial Assistance",
+      "bestFor": "EWS students studying at USICT/GGSIPU",
+      "objective": "Provide financial assistance to economically weaker students toward tuition/fees.",
+      "targetUsers": ["Regular GGSIPU students, including USICT students, who meet EWS criteria"],
+      "eligibility": {
+        "minMarksPercent": null,
+        "maxFamilyIncomeINR": null,
+        "maxFamilyIncomeDisplay": null,
+        "courseType": "Regular student of GGSIPU/USS/Centres/Affiliated Institutes (incl. USICT)",
+        "notes": "Must meet EWS (Economically Weaker Section) criteria."
+      },
+      "requiredDocuments": [
+        "EWS certificate",
+        "Aadhaar",
+        "Academic records",
+        "Fee documents",
+        "Bank details",
+        "Admission/bonafide proof"
+      ],
+      "benefits": {
+        "description": "Financial assistance toward tuition/fees under the EWS scheme",
+        "amountINR": null,
+        "amountDisplay": "Varies (institute-determined)"
+      },
+      "aiTags": [
+        "EWS", "USICT", "GGSIPU", "Economically Weaker", "Tuition Assistance"
+      ],
+      "portal": "GGSIPU",
+      "applicationDeadline": null,
+      "statusNote": "Application involves institute-level submission/recommendation, followed by submission to the Directorate of Students' Welfare."
+    },
+    {
+      "id": "pms-obc",
+      "name": "Post-Matric Scholarship for OBC Students",
+      "bestFor": "OBC students",
+      "objective": "Support OBC students financially so they can continue higher education.",
+      "targetUsers": ["OBC students pursuing professional/technical education"],
+      "eligibility": {
+        "minMarksPercent": 60,
+        "maxFamilyIncomeINR": 100000,
+        "maxFamilyIncomeDisplay": "\u20b91 lakh/year (as stated in the uploaded guide)",
+        "courseType": "Professional/technical, post-matric",
+        "notes": null
+      },
+      "requiredDocuments": [
+        "OBC certificate/NCL (where applicable)",
+        "Income certificate",
+        "Aadhaar",
+        "Marksheets",
+        "Fee receipt",
+        "Bank details",
+        "Admission/bonafide proof",
+        "Photograph"
+      ],
+      "benefits": {
+        "description": "Annual assistance for professional courses",
+        "amountMinINR": 8000,
+        "amountMaxINR": 24000,
+        "amountDisplay": "\u20b98,000\u2013\u20b924,000/year"
+      },
+      "aiTags": [
+        "OBC", "NCL", "60% Marks", "Post-Matric", "B.Tech", "Income-Based"
+      ],
+      "portal": "National Scholarship Portal",
+      "applicationDeadline": null,
+      "statusNote": "Delhi alternative: e-District Delhi also officially lists PMS-OBC."
+    },
+    {
+      "id": "pms-st",
+      "name": "Post-Matric Scholarship for ST Students",
+      "bestFor": "ST students",
+      "objective": "Financial assistance for ST students continuing education after Class 10.",
+      "targetUsers": ["ST students pursuing higher/professional education"],
+      "eligibility": {
+        "minMarksPercent": null,
+        "maxFamilyIncomeINR": null,
+        "maxFamilyIncomeDisplay": null,
+        "courseType": "Higher/professional education, studying in Delhi institutions",
+        "notes": "Income conditions apply (not further specified in the source)."
+      },
+      "requiredDocuments": [
+        "ST certificate",
+        "Income certificate",
+        "Aadhaar",
+        "Academic marksheets",
+        "Fee receipt",
+        "Bank passbook",
+        "Admission/bonafide proof",
+        "Photograph"
+      ],
+      "benefits": {
+        "description": "Tuition fee plus maintenance allowance",
+        "amountINR": null,
+        "amountDisplay": "Tuition fee + maintenance allowance (amount not specified)"
+      },
+      "aiTags": [
+        "ST", "Post-Matric", "Delhi", "B.Tech", "Income-Based", "Government"
+      ],
+      "portal": "e-District Delhi",
+      "applicationDeadline": null,
+      "statusNote": "Delhi's official e-District portal lists the Post-Matric Scholarship schemes for SC/ST and other student scholarship services."
+    },
+    {
+      "id": "top-class-sc",
+      "name": "Central Sector Scheme of Top Class Education for SC Students",
+      "bestFor": "SC students studying in eligible top institutions",
+      "objective": "Provide substantial financial support to SC students pursuing higher education in top institutions.",
+      "targetUsers": ["SC students pursuing professional/technical higher education"],
+      "eligibility": {
+        "minMarksPercent": null,
+        "maxFamilyIncomeINR": null,
+        "maxFamilyIncomeDisplay": null,
+        "courseType": "Professional/technical higher education at a top institution",
+        "notes": "Applicable income conditions apply (not further specified in the source)."
+      },
+      "requiredDocuments": [
+        "SC caste certificate",
+        "Income certificate",
+        "Aadhaar",
+        "Class 10/12 marksheets",
+        "Fee receipt",
+        "Bank details",
+        "Admission/bonafide certificate",
+        "Photograph"
+      ],
+      "benefits": {
+        "description": "Full tuition fee support plus allowances, subject to scheme rules",
+        "amountINR": null,
+        "amountDisplay": "Full tuition fee + allowances (amount varies by scheme rules)"
+      },
+      "aiTags": [
+        "SC", "Top Class", "Government", "B.Tech", "Professional Course", "Income-Based"
+      ],
+      "portal": "National Scholarship Portal",
+      "applicationDeadline": "2026-10-31",
+      "statusNote": "NSP currently lists this scheme with student applications open until 31 October 2026."
+    },
+    {
+      "id": "csss",
+      "name": "Central Sector Scheme of Scholarship (CSSS)",
+      "bestFor": "General-category / merit-oriented students",
+      "objective": "Provide financial support to academically strong students entering higher education.",
+      "targetUsers": ["Undergraduate students with strong Class 12 performance and limited family income"],
+      "eligibility": {
+        "minMarksPercent": null,
+        "minClass12Percentile": 80,
+        "maxFamilyIncomeINR": 800000,
+        "maxFamilyIncomeDisplay": "\u20b98 lakh/year",
+        "courseType": "Undergraduate",
+        "notes": "Class 12 score must be above the 80th percentile."
+      },
+      "requiredDocuments": [
+        "Aadhaar",
+        "Income certificate",
+        "Class 10 & 12 marksheets",
+        "Current fee receipt",
+        "Bank passbook",
+        "Admission/bonafide proof",
+        "Photograph"
+      ],
+      "benefits": {
+        "description": "Annual financial assistance",
+        "amountMinINR": 10000,
+        "amountMaxINR": 20000,
+        "amountDisplay": "\u20b910,000\u2013\u20b920,000/year"
+      },
+      "aiTags": [
+        "General", "Merit-Based", "Class 12", "Income < 8 Lakh", "UG", "B.Tech"
+      ],
+      "portal": "National Scholarship Portal",
+      "applicationDeadline": null,
+      "statusNote": "NSP lists the Central Sector Scheme for College and University Students, with the current cycle information available on the portal."
+    }
+  ]
+}

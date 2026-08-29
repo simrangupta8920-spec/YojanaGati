@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Compass,
   Bot,
@@ -8,7 +8,8 @@ import {
 } from 'lucide-react';
 import type { LanguageCode, View, UserProfile } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { fetchScholarships, type Scholarship } from '@/lib/supabase';
+import { type Scholarship } from '@/lib/supabase';
+import { getLocalScholarships } from '@/lib/scholarshipsData';
 import { useEphemeralSession, type UploadedFile } from '@/hooks/useEphemeralSession';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { LandingView } from '@/views/LandingView';
@@ -25,17 +26,10 @@ export default function App() {
   const [lang, setLang] = useState<LanguageCode>('en');
   const [stage, setStage] = useState<AppStage>('welcome');
   const [view, setView] = useState<View>('browse');
-  const [scholarships, setScholarships] = useState<Scholarship[]>([]);
-  const [loading, setLoading] = useState(true);
+  const scholarships: Scholarship[] = getLocalScholarships();
 
   const session = useEphemeralSession();
 
-  useEffect(() => {
-    fetchScholarships().then((data) => {
-      setScholarships(data);
-      setLoading(false);
-    });
-  }, []);
 
   if (session.isPurged) {
     return (
@@ -135,11 +129,7 @@ export default function App() {
 
       {/* Content */}
       <main className="flex-1 pb-20">
-        {loading ? (
-          <div className="flex h-64 items-center justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-teal-200 border-t-teal-600" />
-          </div>
-        ) : view === 'browse' ? (
+        {view === 'browse' ? (
           <BrowseView
             lang={lang}
             scholarships={scholarships}
