@@ -1,9 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl: string | undefined = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey: string | undefined = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+/**
+ * Supabase client — only created when both env vars are present.
+ * When running locally without a .env file the client will be null and
+ * fetchScholarships() will return [] (App.tsx then uses the local fallback).
+ */
+export const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
 export interface Scholarship {
   id: string;
@@ -37,6 +45,11 @@ export interface Scholarship {
 }
 
 export async function fetchScholarships(): Promise<Scholarship[]> {
+  if (!supabase) {
+    console.info('[YG Supabase] Client not configured (no env vars). Using local fallback.');
+    return [];
+  }
+
   const { data, error } = await supabase
     .from('scholarships')
     .select('*')

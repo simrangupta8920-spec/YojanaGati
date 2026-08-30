@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Compass,
   Bot,
@@ -8,9 +8,9 @@ import {
 } from 'lucide-react';
 import type { LanguageCode, View, UserProfile } from '@/lib/types';
 import { t } from '@/lib/i18n';
-import { type Scholarship } from '@/lib/supabase';
+import { type Scholarship, fetchScholarships } from '@/lib/supabase';
 import { getLocalScholarships } from '@/lib/scholarshipsData';
-import { useEphemeralSession, type UploadedFile } from '@/hooks/useEphemeralSession';
+import { useEphemeralSession } from '@/hooks/useEphemeralSession';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { LandingView } from '@/views/LandingView';
 import { OnboardingView } from '@/views/OnboardingView';
@@ -26,12 +26,56 @@ export default function App() {
   const [lang, setLang] = useState<LanguageCode>('en');
   const [stage, setStage] = useState<AppStage>('welcome');
   const [view, setView] = useState<View>('browse');
-  const scholarships: Scholarship[] = getLocalScholarships();
+  const [scholarships, setScholarships] = useState<Scholarship[]>(getLocalScholarships());
 
   const session = useEphemeralSession();
 
+  // Load scholarships from Supabase on mount, fallback to local json on fail/offline
+  useEffect(() => {
+    async function loadScholarships() {
+      try {
+        const data = await fetchScholarships();
+        if (data && data.length > 0) {
+          setScholarships(data);
+          console.info(`[YG Supabase] Successfully fetched ${data.length} scholarships from live database.`);
+        } else {
+          console.warn('[YG Supabase] Empty database response. Kept local fallback scholarships.');
+        }
+      } catch (err) {
+        console.error('[YG Supabase] Failed to fetch. Kept local fallback scholarships:', err);
+      }
+    }
+    loadScholarships();
+  }, []);
 
-  if (session.isPurged) {
+  // ── Dev-mode: expose verifyPurge on window for console testing ──────────────
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      (window as unknown as Record<string, unknown>).__yg_verifyPurge =
+        session.verifyPurge;
+    }
+  }, [session.verifyPurge]);
+
+  // ── Post-purge verification log (DEV only) ──────────────────────────────────
+  useEffect(() => {
+    if (session.isFilesWiped && import.meta.env.DEV) {
+      // Allow the setState commit to settle before checking
+      const tid = setTimeout(() => {
+        const result = session.verifyPurge();
+        if (result.pass) {
+          console.info('[YG Purge] ✅ All checks passed:', result.checks);
+        } else {
+          console.warn(
+            '[YG Purge] ❌ One or more checks failed:',
+            result.checks.filter((c) => !c.passed),
+          );
+        }
+      }, 0);
+      return () => clearTimeout(tid);
+    }
+  }, [session.isFilesWiped, session.verifyPurge]);
+
+  if (session.isFilesWiped) {
     return (
       <div className="min-h-screen bg-slate-50">
         <PurgeView
@@ -44,6 +88,7 @@ export default function App() {
           }}
           isPurged={true}
           fileCount={0}
+          profilePreserved={Boolean(session.profile)}
         />
       </div>
     );
@@ -140,6 +185,8 @@ export default function App() {
             lang={lang}
             scholarships={scholarships}
             profile={session.profile}
+            messages={session.chatMessages}
+            onMessagesChange={session.setChatMessages}
           />
         ) : view === 'documents' ? (
           <DocumentsView
@@ -150,6 +197,8 @@ export default function App() {
             onAddFile={session.addFile}
             onRemoveFile={session.removeFile}
             onUpdateFileAnalysis={session.updateFileAnalysis}
+            onUpdateParsedField={session.updateParsedField}
+            onUpdateProfile={session.setProfile}
           />
         ) : view === 'profile' ? (
           <ProfileView lang={lang} profile={session.profile} />
@@ -163,6 +212,7 @@ export default function App() {
             }}
             isPurged={false}
             fileCount={session.uploadedFiles.length}
+            profilePreserved={Boolean(session.profile)}
           />
         ) : null}
       </main>

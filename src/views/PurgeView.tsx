@@ -9,6 +9,8 @@ interface PurgeViewProps {
   onNewSession: () => void;
   isPurged: boolean;
   fileCount: number;
+  /** True when a UserProfile exists and was retained across the purge. */
+  profilePreserved: boolean;
 }
 
 export function PurgeView({
@@ -17,6 +19,7 @@ export function PurgeView({
   onNewSession,
   isPurged,
   fileCount,
+  profilePreserved,
 }: PurgeViewProps) {
   const [confirming, setConfirming] = useState(false);
 
@@ -46,12 +49,22 @@ export function PurgeView({
             <span className="font-medium text-teal-600">0</span>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-slate-500">Profile data</span>
-            <span className="font-medium text-teal-600">DELETED</span>
+            <span className="text-slate-500">Chat history</span>
+            <span className="font-medium text-teal-600">CLEARED</span>
           </div>
           <div className="flex items-center justify-between text-sm">
             <span className="text-slate-500">Extracted PII</span>
-            <span className="font-medium text-teal-600">ZEROED</span>
+            <span className="font-medium text-teal-600">NULLED</span>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-slate-500">Profile data</span>
+            <span
+              className={`font-medium ${
+                profilePreserved ? 'text-amber-600' : 'text-teal-600'
+              }`}
+            >
+              {profilePreserved ? 'PRESERVED' : 'CLEARED'}
+            </span>
           </div>
         </div>
 
@@ -100,6 +113,14 @@ export function PurgeView({
             Enforced
           </span>
         </div>
+        {profilePreserved && (
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-slate-500">Profile data</span>
+            <span className="text-sm font-medium text-amber-600">
+              Will be kept
+            </span>
+          </div>
+        )}
       </div>
 
       {!confirming ? (

@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Sparkles, Volume2 } from 'lucide-react';
-import type { Scholarship, LanguageCode, UserProfile, ChatMessage } from '@/lib/types';
+import type { LanguageCode, UserProfile, ChatMessage } from '@/lib/types';
+import type { Scholarship } from '@/lib/supabase';
+
 import { t } from '@/lib/i18n';
 import { ragQuery } from '@/lib/rag';
 import { useSpeechRecognition, useTextToSpeech } from '@/hooks/useSpeech';
@@ -10,25 +12,34 @@ interface ChatViewProps {
   lang: LanguageCode;
   scholarships: Scholarship[];
   profile: UserProfile | null;
+  /**
+   * Chat history is owned by useEphemeralSession (lifted up so purge() can
+   * clear it). ChatView reads from and writes back to this lifted state via
+   * the two props below.
+   */
+  messages: ChatMessage[];
+  onMessagesChange: (messages: ChatMessage[]) => void;
 }
 
-export function ChatView({ lang, scholarships, profile }: ChatViewProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: 'welcome',
-      role: 'assistant',
-      content:
-        'Namaste! I am your AI scholarship assistant. I can help you find scholarships, check eligibility, and guide you on required documents. What would you like to know?',
-      timestamp: Date.now(),
-    },
-  ]);
+export function ChatView({
+  lang,
+  scholarships,
+  profile,
+  messages,
+  onMessagesChange,
+}: ChatViewProps) {
   const [input, setInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { speak, stopSpeaking, isSpeaking } = useTextToSpeech(lang);
-  const { transcript, startListening, isListening, resetTranscript, supported: sttSupported } =
-    useSpeechRecognition(lang);
+  const {
+    transcript,
+    startListening,
+    isListening,
+    resetTranscript,
+    supported: sttSupported,
+  } = useSpeechRecognition(lang);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -53,7 +64,8 @@ export function ChatView({ lang, scholarships, profile }: ChatViewProps) {
       content: message,
       timestamp: Date.now(),
     };
-    setMessages((prev) => [...prev, userMsg]);
+    const withUser = [...messages, userMsg];
+    onMessagesChange(withUser);
     setInput('');
     setIsProcessing(true);
 
@@ -66,7 +78,7 @@ export function ChatView({ lang, scholarships, profile }: ChatViewProps) {
         timestamp: Date.now(),
         scholarshipRefs: result.matchedScholarships.map((s) => s.name),
       };
-      setMessages((prev) => [...prev, assistantMsg]);
+      onMessagesChange([...withUser, assistantMsg]);
       setIsProcessing(false);
       speak(result.answer);
     }, 600);
