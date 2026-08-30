@@ -71,7 +71,7 @@ export function ChatView({
     setIsProcessing(true);
 
     setTimeout(() => {
-      const result = ragQuery(message, scholarships, profile ?? undefined);
+      const result = ragQuery(message, scholarships, profile ?? undefined, lang);
       const assistantMsg: ChatMessage = {
         id: crypto.randomUUID(),
         role: 'assistant',
