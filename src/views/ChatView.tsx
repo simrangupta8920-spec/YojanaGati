@@ -8,6 +8,17 @@ import { ragQuery } from '@/lib/rag';
 import { useSpeechRecognition, useTextToSpeech } from '@/hooks/useSpeech';
 import { VoiceButton } from '@/components/VoiceButton';
 
+function renderMessageContent(content: string) {
+  const parts = content.split('**');
+  if (parts.length === 1) return content;
+  return parts.map((part, index) => {
+    if (index % 2 === 1) {
+      return <strong key={index} className="font-bold text-slate-900">{part}</strong>;
+    }
+    return part;
+  });
+}
+
 interface ChatViewProps {
   lang: LanguageCode;
   scholarships: Scholarship[];
@@ -136,7 +147,7 @@ export function ChatView({
                   : 'bg-slate-100 text-slate-700'
               }`}
             >
-              <p className="whitespace-pre-line">{msg.content}</p>
+              <p className="whitespace-pre-line">{renderMessageContent(msg.content)}</p>
               {msg.role === 'assistant' && (
                 <button
                   onClick={() =>

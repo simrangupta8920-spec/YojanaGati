@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Search, Filter, X, Sparkles, CheckCircle2, AlertCircle, HelpCircle } from 'lucide-react';
-import type { Scholarship, LanguageCode, UserProfile } from '@/lib/types';
+import type { LanguageCode, UserProfile } from '@/lib/types';
+import type { Scholarship } from '@/lib/supabase';
 import { t } from '@/lib/i18n';
 import { ScholarshipCard } from '@/components/ScholarshipCard';
 import { rankScholarships, getEligible, type EligibilityResult } from '@/lib/eligibility';

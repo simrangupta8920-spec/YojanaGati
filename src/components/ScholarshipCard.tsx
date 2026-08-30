@@ -11,7 +11,8 @@ import {
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
-import type { Scholarship, LanguageCode, UserProfile } from '@/lib/types';
+import type { LanguageCode, UserProfile } from '@/lib/types';
+import type { Scholarship } from '@/lib/supabase';
 import { t } from '@/lib/i18n';
 import { SpeakButton } from './VoiceButton';
 
@@ -156,7 +157,7 @@ export function ScholarshipCard({
                 {t(lang, 'requiredDocuments')}
               </h4>
               <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2">
-                {scholarship.required_documents.map((doc, i) => (
+                {scholarship.required_documents.map((doc: string, i: number) => (
                   <li
                     key={i}
                     className="flex items-center gap-2 text-sm text-slate-600"
