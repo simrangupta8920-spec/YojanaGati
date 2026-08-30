@@ -8,9 +8,9 @@ import { ragQuery } from '@/lib/rag';
 import { useTextToSpeech } from '@/hooks/useSpeech';
 import { VoiceButton } from '@/components/VoiceButton';
 
-function renderMessageContent(content: string) {
-  const parts = content.split('**');
-  if (parts.length === 1) return content;
+function parseBoldText(text: string) {
+  const parts = text.split('**');
+  if (parts.length === 1) return text;
   return parts.map((part, index) => {
     if (index % 2 === 1) {
       return <strong key={index} className="font-bold text-slate-900">{part}</strong>;
@@ -18,6 +18,32 @@ function renderMessageContent(content: string) {
     return part;
   });
 }
+
+function renderMessageContent(content: string) {
+  const lines = content.split('\n');
+  return (
+    <span className="space-y-1 block">
+      {lines.map((line, idx) => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('•') || trimmed.startsWith('-')) {
+          const rest = line.substring(line.indexOf(trimmed[0]) + 1).trim();
+          return (
+            <span key={idx} className="flex items-start gap-1.5 pl-2 mt-1 block text-slate-700">
+              <span className="text-teal-600 font-semibold">•</span>
+              <span className="flex-1">{parseBoldText(rest)}</span>
+            </span>
+          );
+        }
+        return (
+          <span key={idx} className="block min-h-[1.2rem] text-slate-700 leading-relaxed">
+            {parseBoldText(line)}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
 
 interface ChatViewProps {
   lang: LanguageCode;
@@ -137,7 +163,7 @@ export function ChatView({
                   : 'bg-slate-100 text-slate-700'
               }`}
             >
-              <p className="whitespace-pre-line">{renderMessageContent(msg.content)}</p>
+              <div className="whitespace-pre-wrap">{renderMessageContent(msg.content)}</div>
               {msg.role === 'assistant' && (
                 <button
                   onClick={() =>
