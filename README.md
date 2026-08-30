@@ -1,7 +1,7 @@
 <div align="center">
 
 
-<img src="./public/logo.png" alt="YojanaGati Logo" width="140"/>
+<img src="./screenshots/logo1.png" alt="YojanaGati Logo" width="140"/>
 
 # YojanaGati (योजनागति) 🎓
 
