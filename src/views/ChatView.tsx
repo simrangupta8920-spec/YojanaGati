@@ -5,7 +5,7 @@ import type { Scholarship } from '@/lib/supabase';
 
 import { t } from '@/lib/i18n';
 import { ragQuery } from '@/lib/rag';
-import { useSpeechRecognition, useTextToSpeech } from '@/hooks/useSpeech';
+import { useTextToSpeech } from '@/hooks/useSpeech';
 import { VoiceButton } from '@/components/VoiceButton';
 
 function renderMessageContent(content: string) {
@@ -44,26 +44,16 @@ export function ChatView({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { speak, stopSpeaking, isSpeaking } = useTextToSpeech(lang);
-  const {
-    transcript,
-    startListening,
-    isListening,
-    resetTranscript,
-    supported: sttSupported,
-  } = useSpeechRecognition(lang);
+  const sttSupported = typeof window !== 'undefined' && (
+    'SpeechRecognition' in window || 
+    'webkitSpeechRecognition' in window
+  );
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
-
-  useEffect(() => {
-    if (transcript && !isListening) {
-      setInput(transcript);
-      resetTranscript();
-    }
-  }, [transcript, isListening, resetTranscript]);
 
   const handleSend = (text?: string) => {
     const message = text ?? input;

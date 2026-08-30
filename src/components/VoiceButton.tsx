@@ -1,4 +1,4 @@
-import { useState, useRef, type ReactNode } from 'react';
+import { useState, useRef, useEffect, type ReactNode } from 'react';
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import { useSpeechRecognition, useTextToSpeech } from '@/hooks/useSpeech';
 import type { LanguageCode } from '@/lib/types';
@@ -22,14 +22,24 @@ export function VoiceButton({
   const { isListening, transcript, supported, startListening, stopListening, resetTranscript } =
     useSpeechRecognition(lang);
 
-  const handleToggle = () => {
-    if (isListening) {
-      stopListening();
-      if (transcript && onTranscript) {
+  const prevListeningRef = useRef(isListening);
+
+  useEffect(() => {
+    // If it was listening, and now it stopped (either auto-stopped or clicked)
+    if (prevListeningRef.current && !isListening) {
+      if (transcript.trim() && onTranscript) {
         onTranscript(transcript);
       }
       resetTranscript();
+    }
+    prevListeningRef.current = isListening;
+  }, [isListening, transcript, onTranscript, resetTranscript]);
+
+  const handleToggle = () => {
+    if (isListening) {
+      stopListening();
     } else {
+      resetTranscript();
       startListening();
     }
   };
